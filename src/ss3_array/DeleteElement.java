@@ -17,7 +17,8 @@ public class DeleteElement {
                 deletedIndex = i;
             }
         }
-        if (deletedEl != -1) {
+
+        if (deletedIndex != -1) {
             for (int j = deletedIndex; j < array.length - 1; j++) {
                 array[j] = array[j + 1];
             }
