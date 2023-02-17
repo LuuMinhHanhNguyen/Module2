@@ -1,6 +1,5 @@
 package ss1_introduction_java.bai_tap;
 
-import java.util.Objects;
 import java.util.Scanner;
 
 public class ReadNumber {
@@ -78,8 +77,8 @@ public class ReadNumber {
         String thirdNum = String.valueOf(string.charAt(2));
         String secondAndThird = secondNum + thirdNum;
         int secondAndThirdToInt = Integer.parseInt(secondAndThird);
-        result += from0To9(firstNum) + " hundred";
 
+        result += from0To9(firstNum) + " hundred";
         if (secondAndThirdToInt == 0) result += "";
         else if (secondAndThirdToInt <= 9) result += " and " + from0To9(thirdNum);
         else if (secondAndThirdToInt <= 19) result += " and " + from10To19(secondAndThird);
