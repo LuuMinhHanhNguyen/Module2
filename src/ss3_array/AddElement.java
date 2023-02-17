@@ -18,7 +18,7 @@ public class AddElement {
         System.out.println("Input index for added element:");
         index = Integer.parseInt(sc.nextLine());
 
-        if(index <= array.length - 1){
+        if (index <= array.length - 1) {
 
             array2[array2.length - 1] = array[array.length - 1 - 1];
 
