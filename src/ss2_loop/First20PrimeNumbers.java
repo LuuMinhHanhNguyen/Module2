@@ -1,13 +1,14 @@
 package ss2_loop;
 
-public class PrimeNumbersLessThan100 {
-
+public class First20PrimeNumbers {
     public static void main(String[] args) {
-        int number = 0;
-        int check = 100;
 
-        while (number < check) {
+        int count = 0;
+        int number = 0;
+
+        while (count < 20) {
             if (isPrime(number)) {
+                count++;
                 System.out.println(number);
             }
             number++;
@@ -22,7 +23,7 @@ public class PrimeNumbersLessThan100 {
             if (num % i == 0) return false;
         }
         return true;
+
     }
+
 }
-
-
