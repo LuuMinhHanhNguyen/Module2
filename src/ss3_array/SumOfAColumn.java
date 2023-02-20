@@ -15,6 +15,7 @@ public class SumOfAColumn {
         length2 = Integer.parseInt(sc.nextLine());
 
         int[][] array2D = new int[length1][length2];
+
         int input;
 
         for (int i = 0; i < array2D.length; i++) {
@@ -24,19 +25,23 @@ public class SumOfAColumn {
                 array2D[i][j] = input;
             }
         }
-
         System.out.println(Arrays.deepToString(array2D));
 
-        System.out.println("Enter row number to get its sum:");
-        int rowNumber = Integer.parseInt(sc.nextLine());
+        // call function
+        System.out.println(sumOfColumn(array2D, 1));
+        System.out.println(sumOfColumn(array2D, 2));
+        System.out.println(sumOfColumn(array2D, 3));
+    }
 
-        int index = rowNumber - 1;
+    public static int sumOfColumn(int[][] array2D, int row) {
+        int index = row - 1;
         int sum = 0;
 
         for (int i = 0; i < array2D.length; i++) {
             sum += array2D[i][index];
         }
-        System.out.println(sum);
+        return sum;
     }
+
 
 }
