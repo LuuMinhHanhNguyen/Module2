@@ -24,8 +24,11 @@ public class ConcatenateArray {
         }
 
         for (int i = 0; i < array3.length; i++) {
-            if (i < array1.length) array3[i] = array1[i];
-            else array3[i] = array2[i - array1.length];
+            if (i < array1.length) {
+                array3[i] = array1[i];
+            } else {
+                array3[i] = array2[i - array1.length];
+            }
         }
         System.out.println(Arrays.toString(array3));
 

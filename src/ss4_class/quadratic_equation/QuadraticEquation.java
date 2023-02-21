@@ -1,4 +1,4 @@
-package ss4_class;
+package ss4_class.quadratic_equation;
 
 public class QuadraticEquation {
     private double a;

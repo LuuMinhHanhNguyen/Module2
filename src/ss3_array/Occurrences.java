@@ -7,10 +7,13 @@ public class Occurrences {
         System.out.println(occurrences(string, character));
 
     }
-    public static int occurrences(String string, char character){
+
+    public static int occurrences(String string, char character) {
         int count = 0;
         for (int i = 0; i < string.length(); i++) {
-            if (string.charAt(i) == character) count++;
+            if (string.charAt(i) == character) {
+                count++;
+            }
         }
         return count;
     }

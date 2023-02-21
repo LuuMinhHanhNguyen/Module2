@@ -32,7 +32,8 @@ public class SumOfADiagonal {
 
         for (int i = 0; i < array.length; i++) {
             sum += array[i][i];
-            sum += array[i][array.length - 1 - i];
+            // diagonal from right to left
+//            sum += array[i][array.length - 1 - i];
         }
 
         return sum;

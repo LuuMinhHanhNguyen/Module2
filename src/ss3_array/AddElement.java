@@ -23,9 +23,15 @@ public class AddElement {
             array2[array2.length - 1] = array[array.length - 1 - 1];
 
             for (int i = 0; i < array2.length - 1; i++) {
-                if (i < index) array2[i] = array[i];
-                if (i == index) array2[i] = addedElement;
-                if (i > index) array2[i] = array[i - 1];
+                if (i < index) {
+                    array2[i] = array[i];
+                }
+                if (i == index) {
+                    array2[i] = addedElement;
+                }
+                if (i > index) {
+                    array2[i] = array[i - 1];
+                }
             }
 
             System.out.println(Arrays.toString(array2));
