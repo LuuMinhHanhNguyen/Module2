@@ -10,7 +10,7 @@ public class DrawRectangleAndTriangle {
         System.out.println();
         drawTriangle3(5);
         System.out.println();
-        drawDiamond1(5);
+        drawDiamond1(7);
         System.out.println();
         drawDiamond2(5);
     }
