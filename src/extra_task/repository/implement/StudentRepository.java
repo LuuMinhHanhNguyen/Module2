@@ -31,10 +31,12 @@ public class StudentRepository implements IStudentRepository {
                 if (cf.equals("Yes")) {
                     studentList.remove(studentList.get(i));
                     System.out.println("Student deleted!");
-                    break;
+                    return;
+                    // use 'return' to end the function
                 }
-            } else System.out.println("Cannot find your student's ID!");
+            }
         }
-
+        // remember not to use if - else in loop .. consider this case to know more abt it
+        System.out.println("Cannot find your student's ID!");
     }
 }

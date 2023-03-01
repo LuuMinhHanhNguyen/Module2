@@ -1,4 +1,4 @@
-package ss11_stack_queue;
+package ss11_stack_queue.stack;
 
 import java.util.EmptyStackException;
 import java.util.LinkedList;

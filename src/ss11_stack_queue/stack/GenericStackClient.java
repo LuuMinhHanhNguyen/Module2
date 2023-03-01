@@ -1,6 +1,4 @@
-package ss11_stack_queue;
-
-import java.util.Arrays;
+package ss11_stack_queue.stack;
 
 public class GenericStackClient {
     private static void stackOfIStrings() {

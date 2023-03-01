@@ -9,7 +9,7 @@ public class StudentController {
     private IStudentService iStudentService = new StudentService();
 
     public void menuStudent() {
-        int input;
+        String input;
 
         Scanner sc = new Scanner(System.in);
 
@@ -22,23 +22,23 @@ public class StudentController {
             System.out.println("3. Display student's list");
             System.out.println("4. Exit");
             System.out.println("Enter a number: ");
-            input = Integer.parseInt(sc.nextLine());
+            input = sc.nextLine();
             switch (input) {
-                case 1:
+                case "1":
                     iStudentService.addStudent();
                     break;
-                case 2:
+                case "2":
                     iStudentService.deleteStudent();
                     break;
-                case 3:
+                case "3":
                     iStudentService.displayAllStudents();
                     break;
-                case 4:
+                case "4":
                     System.out.println("Thank you!");
                     break;
             }
 
-        } while (input != 4);
+        } while (!input.equals("4"));
     }
 }
 

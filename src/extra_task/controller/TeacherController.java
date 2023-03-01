@@ -11,7 +11,7 @@ public class TeacherController {
     private ITeacherService iTeacherService  = new TeacherService();
 
     public void menuTeacher(){
-        int input;
+        String input;
 
         Scanner sc = new Scanner(System.in);
 
@@ -24,23 +24,23 @@ public class TeacherController {
             System.out.println("3. Display teacher's list");
             System.out.println("4. Exit");
             System.out.println("Enter a number: ");
-            input = Integer.parseInt(sc.nextLine());
+            input = sc.nextLine();
             switch (input) {
-                case 1:
+                case "1":
                     iTeacherService.addTeacher();
                     break;
-                case 2:
+                case "2":
                     iTeacherService.deleteTeacher();
                     break;
-                case 3:
+                case "3":
                     iTeacherService.displayAllTeachers();
                     break;
-                case 4:
+                case "4":
                     System.out.println("Thank you!");
                     break;
             }
 
-        } while (input != 4);
+        } while (!input.equals("4"));
     }
 
 }

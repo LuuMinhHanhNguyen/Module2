@@ -31,10 +31,10 @@ public class TeacherRepository implements ITeacherRepository {
                 if (cf.equals("Yes")) {
                     teacherList.remove(teacherList.get(i));
                     System.out.println("Teacher deleted!");
-                    break;
+                    return;
                 }
-            } else System.out.println("Cannot find your teacher's ID!");
+            }
         }
-
+        System.out.println("Cannot find your teacher's ID!");
     }
 }

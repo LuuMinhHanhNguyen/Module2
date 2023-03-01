@@ -1,4 +1,4 @@
-package ss11_stack_queue;
+package ss11_stack_queue.counting_characters;
 
 import java.util.TreeMap;
 
