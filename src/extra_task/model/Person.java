@@ -1,29 +1,29 @@
-package extra_task;
+package extra_task.model;
 
 import java.util.Date;
 
 public abstract class Person {
-    private String ID;
+    private int ID;
     private String name;
     private String dob;
-    private boolean gender;
+    private Boolean gender;
 
     public Person(){
 
     }
 
-    public Person(String ID, String name, String dob, boolean gender) {
+    public Person(int ID, String name, String dob, Boolean gender) {
         this.ID = ID;
         this.name = name;
         this.dob = dob;
         this.gender = gender;
     }
 
-    public String getID() {
+    public int getID() {
         return ID;
     }
 
-    public void setID(String ID) {
+    public void setID(int ID) {
         this.ID = ID;
     }
 
@@ -43,11 +43,11 @@ public abstract class Person {
         this.dob = dob;
     }
 
-    public boolean isGender() {
+    public Boolean isGender() {
         return gender;
     }
 
-    public void setGender(boolean gender) {
+    public void setGender(Boolean gender) {
         this.gender = gender;
     }
 
