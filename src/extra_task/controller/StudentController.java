@@ -37,7 +37,6 @@ public class StudentController {
                     System.out.println("Thank you!");
                     break;
             }
-
         } while (!input.equals("4"));
     }
 }
