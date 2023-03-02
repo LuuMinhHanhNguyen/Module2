@@ -6,25 +6,20 @@ import java.util.Stack;
 
 public class Palindrome {
     public static void main(String[] args) {
-        String hi = " minh  hnim ";
-        checkPalindrome(hi);
+        String string = "Able was I ere I saw Elba";
+        checkPalindrome(string);
     }
     static void checkPalindrome(String string) {
-        if (string.length() % 2 == 0) {
-            // nua sau la stack
-            Stack<Character> stackChar = new Stack<>();
-            // nua dau la Queue
-            Queue<Character> queueChar = new LinkedList<>();
-            int check = string.length() / 2;
+        Stack<Character> stackChar = new Stack<>();
+        Queue<Character> queueChar = new LinkedList<>();
 
-            for (int i = 0; i < string.length(); i++) {
-                if (i < check) stackChar.push(string.charAt(i));
-                else queueChar.add(string.charAt(i));
-            }
-            System.out.println("Stack:" + stackChar);
-            System.out.println("Queue: " + queueChar);
+        for (Character character : string.toLowerCase().toCharArray()) {
+            stackChar.push(character);
+            queueChar.offer(character);
+        }
+        System.out.println("Stack:" + stackChar);
+        System.out.println("Queue: " + queueChar);
             boolean flag = true;
-
             for (int i = 0; i < stackChar.size(); i++) {
                 if (stackChar.pop() != queueChar.poll()) {
                     flag = false;
@@ -33,7 +28,6 @@ public class Palindrome {
             }
             if (flag) System.out.println("This is a palindrome string!");
             else System.out.println("This is NOT a palindrome string!");
-        } else System.out.println("This is NOT a palindrome string!");
-    }
 
+    }
 }
