@@ -8,13 +8,14 @@ public class CountingCharacters {
         String name = "Nguyen Luu Minh Hanh";
         for (char character: name.toLowerCase().toCharArray()) {
             if(result.containsKey(character)){
+
                 int count = result.get(character);
                 result.put(character, count+1);
             } else {
                 result.put(character, 1);
             }
         }
-
+        result.remove(' ');
         System.out.println(result);
     }
 

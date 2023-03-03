@@ -10,4 +10,5 @@ public interface IStudentRepository {
     void addStudent(Student student);
 
     void deleteStudent(int id);
+
 }

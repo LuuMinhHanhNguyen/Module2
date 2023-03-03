@@ -4,10 +4,12 @@ import ss12_java_collection_framework.product_management.model.Product;
 import ss12_java_collection_framework.product_management.repository.IProductRepository;
 import ss12_java_collection_framework.product_management.repository.ProductRepository;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ProductService implements IProductService{
     IProductRepository iProductRepository = new ProductRepository();
+    List<Product> products = iProductRepository.displayAll();
     private Scanner scanner = new Scanner(System.in);
     @Override
     public void displayAll() {

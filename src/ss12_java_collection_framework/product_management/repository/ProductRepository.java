@@ -55,39 +55,41 @@ public class ProductRepository implements IProductRepository{
         Product editedProduct;
         for (int i = 0; i < products.size(); i++) {
             if (products.get(i).getID() == ID){
-               do {
-                   editedProduct = products.get(i);
-                   System.out.println("How do you want to change your product's detail:");
-                   System.out.println("1.Change Product Name");
-                   System.out.println("2.Change Product Price");
-                   System.out.println("3. Both");
-                   cf = scanner.nextLine();
-                   if(cf.equals("1")) {
-                       System.out.println("Please enter new name for your product:");
-                       String newName = scanner.nextLine();
-                       editedProduct.setName(newName);
-                       return;
-                   } else if (cf.equals("2")){
-                       System.out.println("Please enter new price for your product:");
-                       double newPrice = Double.parseDouble(scanner.nextLine());
-                       editedProduct.setPrice(newPrice);
-                       return;
-                   } else if(cf.equals("3")){
-                       System.out.println("Please enter new name for your product:");
-                       String newName = scanner.nextLine();
-                       System.out.println("Please enter new price for your product:");
-                       double newPrice = Double.parseDouble(scanner.nextLine());
-                       editedProduct.setName(newName);
-                       editedProduct.setPrice(newPrice);
-                       return;
-                   } else {
-                       System.out.println("Please enter a valid function!");
-                   }
-               } while (true);
+                do {
+                    editedProduct = products.get(i);
+                    System.out.println("How do you want to change your product's detail:");
+                    System.out.println("1.Change Product Name");
+                    System.out.println("2.Change Product Price");
+                    System.out.println("3. Both");
+                    cf = scanner.nextLine();
+                    if(cf.equals("1")) {
+                        System.out.println("Please enter new name for your product:");
+                        String newName = scanner.nextLine();
+                        editedProduct.setName(newName);
+                        return;
+                    } else if (cf.equals("2")){
+                        System.out.println("Please enter new price for your product:");
+                        double newPrice = Double.parseDouble(scanner.nextLine());
+                        editedProduct.setPrice(newPrice);
+                        return;
+                    } else if(cf.equals("3")){
+                        System.out.println("Please enter new name for your product:");
+                        String newName = scanner.nextLine();
+                        System.out.println("Please enter new price for your product:");
+                        double newPrice = Double.parseDouble(scanner.nextLine());
+                        editedProduct.setName(newName);
+                        editedProduct.setPrice(newPrice);
+                        return;
+                    } else {
+                        System.out.println("Please enter a valid function!");
+                    }
+                } while (true);
             } else {
                 System.out.println("Cannot find the product with its input ID!");
             }
         }
+
+
     }
 
     @Override
