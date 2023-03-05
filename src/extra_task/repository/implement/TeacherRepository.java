@@ -37,4 +37,15 @@ public class TeacherRepository implements ITeacherRepository {
         }
         System.out.println("Cannot find your teacher's ID!");
     }
+
+    @Override
+    public List<Teacher> searchByName(String teacherName) {
+        List<Teacher> suggestedTeachers = new ArrayList<>();
+        for (int i = 0; i < teacherList.size(); i++) {
+            if(teacherList.get(i).getName().contains(teacherName)){
+                suggestedTeachers.add(teacherList.get(i));
+            }
+        }
+        return suggestedTeachers;
+    }
 }

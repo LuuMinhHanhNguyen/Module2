@@ -39,4 +39,15 @@ public class StudentRepository implements IStudentRepository {
         // remember not to use if - else in loop .. consider this case to know more abt it
         System.out.println("Cannot find your student's ID!");
     }
+
+    @Override
+    public List<Student> searchByName(String studentName) {
+        List<Student> suggestedStudents = new ArrayList<>();
+        for (int i = 0; i < studentList.size(); i++) {
+            if(studentList.get(i).getName().contains(studentName)){
+                suggestedStudents.add(studentList.get(i));
+            }
+        }
+        return suggestedStudents;
+    }
 }

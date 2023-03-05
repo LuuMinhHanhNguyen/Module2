@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 public class StudentService implements IStudentService {
     private IStudentRepository iStudentRepository = new StudentRepository();
+    private Scanner scanner = new Scanner(System.in);
 
     @Override
     public void displayAllStudents() {
@@ -28,16 +29,15 @@ public class StudentService implements IStudentService {
     @Override
     public void addStudent() {
 
-        Scanner sc = new Scanner(System.in);
         System.out.println("Enter student's name:");
-        String name = sc.nextLine();
+        String name = scanner.nextLine();
         System.out.println("Enter student's ID:");
-        int ID = Integer.parseInt(sc.nextLine());
+        int ID = Integer.parseInt(scanner.nextLine());
         System.out.println("Enter student's class:");
-        String classes = sc.nextLine();
+        String classes = scanner.nextLine();
         System.out.println("Enter student's gender: (1 =  Male, 2 = Female, 3 = Other gender)");
         Boolean gender;
-        int tempGender = Integer.parseInt(sc.nextLine());
+        int tempGender = Integer.parseInt(scanner.nextLine());
         if (tempGender == 1) {
             gender = true;
         } else if (tempGender == 2) {
@@ -46,9 +46,9 @@ public class StudentService implements IStudentService {
             gender = null;
         }
         System.out.println("Enter student's birthday:");
-        String dob = sc.nextLine();
+        String dob = scanner.nextLine();
         System.out.println("Enter student's grade:");
-        double grade = Integer.parseInt(sc.nextLine());
+        double grade = Integer.parseInt(scanner.nextLine());
 
         Student newStudent = new Student(classes, grade, ID, name, gender, dob);
         iStudentRepository.addStudent(newStudent);
@@ -58,10 +58,20 @@ public class StudentService implements IStudentService {
 
     @Override
     public void deleteStudent() {
-        int id;
         System.out.println("Enter student's ID to delete:");
-        Scanner sc = new Scanner(System.in);
-        id = Integer.parseInt(sc.nextLine());
+        int id = Integer.parseInt(scanner.nextLine());
         iStudentRepository.deleteStudent(id);
+    }
+
+    @Override
+    public void searchByName() {
+        System.out.println("Please enter student's name to find:");
+        String studentName = scanner.nextLine();
+        List<Student> suggestedStudents = iStudentRepository.searchByName(studentName);
+        if (suggestedStudents.isEmpty()){
+            System.out.println("There is no student matching your search name!");
+        } else {
+            System.out.println(suggestedStudents);
+        }
     }
 }

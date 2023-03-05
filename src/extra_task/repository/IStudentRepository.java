@@ -11,4 +11,6 @@ public interface IStudentRepository {
 
     void deleteStudent(int id);
 
+     List<Student> searchByName(String studentName);
+
 }

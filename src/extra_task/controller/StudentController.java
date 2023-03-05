@@ -20,7 +20,8 @@ public class StudentController {
             System.out.println("1. Add a new student");
             System.out.println("2. Delete a student");
             System.out.println("3. Display student's list");
-            System.out.println("4. Exit");
+            System.out.println("4. Find Students");
+            System.out.println("5. Exit");
             System.out.println("Enter a number: ");
             input = sc.nextLine();
             switch (input) {
@@ -34,10 +35,13 @@ public class StudentController {
                     iStudentService.displayAllStudents();
                     break;
                 case "4":
+                    iStudentService.searchByName();
+                    break;
+                case "5":
                     System.out.println("Thank you!");
                     break;
             }
-        } while (!input.equals("4"));
+        } while (!input.equals("5"));
     }
 }
 

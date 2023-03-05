@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 public class TeacherService implements ITeacherService {
     private ITeacherRepository iTeacherRepository = new TeacherRepository();
+    private Scanner scanner = new Scanner(System.in);
 
     @Override
     public void displayAllTeachers() {
@@ -27,14 +28,13 @@ public class TeacherService implements ITeacherService {
     @Override
     public void addTeacher() {
 
-        Scanner sc = new Scanner(System.in);
         System.out.println("Enter teacher's name:");
-        String name = sc.nextLine();
+        String name = scanner.nextLine();
         System.out.println("Enter teacher's ID:");
-        int ID = Integer.parseInt(sc.nextLine());
+        int ID = Integer.parseInt(scanner.nextLine());
         System.out.println("Enter teacher's gender: (1 =  Male, 2 = Female, 3 = Other gender)");
         Boolean gender;
-        int tempGender = Integer.parseInt(sc.nextLine());
+        int tempGender = Integer.parseInt(scanner.nextLine());
         if (tempGender == 1) {
             gender = true;
         } else if (tempGender == 2) {
@@ -43,9 +43,9 @@ public class TeacherService implements ITeacherService {
             gender = null;
         }
         System.out.println("Enter student's birthday:");
-        String dob = sc.nextLine();
+        String dob = scanner.nextLine();
         System.out.println("Enter teacher's teaching subject:");
-        String teachingSubject = sc.nextLine();
+        String teachingSubject = scanner.nextLine();
         Teacher newTeacher = new Teacher(ID, name, dob, gender, teachingSubject);
         iTeacherRepository.addTeacher(newTeacher);
         System.out.println("Teacher added!");
@@ -54,10 +54,20 @@ public class TeacherService implements ITeacherService {
 
     @Override
     public void deleteTeacher() {
-        int id;
         System.out.println("Enter teacher's ID to delete:");
-        Scanner sc = new Scanner(System.in);
-        id = Integer.parseInt(sc.nextLine());
+        int id = Integer.parseInt(scanner.nextLine());
         iTeacherRepository.deleteTeacher(id);
+    }
+
+    @Override
+    public void searchByName() {
+        System.out.println("Please enter teacher's name to find:");
+        String teacherName = scanner.nextLine();
+        List<Teacher> suggestedTeachers = iTeacherRepository.searchByName(teacherName);
+        if (suggestedTeachers.isEmpty()){
+            System.out.println("There is no teacher matching your search name!");
+        } else {
+            System.out.println(suggestedTeachers);
+        }
     }
 }
