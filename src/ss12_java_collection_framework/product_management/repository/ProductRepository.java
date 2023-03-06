@@ -30,6 +30,7 @@ public class ProductRepository implements IProductRepository{
         System.out.println("Cannot find the product with its input name!");
     }
 
+
     @Override
     public void deleteProduct(int ID) {
         String cf;
@@ -48,6 +49,7 @@ public class ProductRepository implements IProductRepository{
         }
         System.out.println("Cannot find the product with its input ID!");
     }
+
 
     @Override
     public void editProduct(int ID) {

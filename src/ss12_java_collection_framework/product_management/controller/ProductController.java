@@ -35,7 +35,7 @@ public class ProductController {
             } else if (choice.equals("4")) {
                 iProductService.displayAll();
             } else if (choice.equals("5")) {
-                iProductService.findProductById();
+                iProductService.findProductByName();
             } else if (choice.equals("6")) {
                 iProductService.sortByPrice();
             } else if (choice.equals("7")) {

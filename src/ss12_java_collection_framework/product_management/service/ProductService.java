@@ -6,6 +6,7 @@ import ss12_java_collection_framework.product_management.repository.ProductRepos
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class ProductService implements IProductService{
     IProductRepository iProductRepository = new ProductRepository();
@@ -35,7 +36,7 @@ public class ProductService implements IProductService{
     }
 
     @Override
-    public void findProductById() {
+    public void findProductByName() {
         System.out.println("Search product by name:");
         String productName = scanner.nextLine();
         iProductRepository.findProductByName(productName);

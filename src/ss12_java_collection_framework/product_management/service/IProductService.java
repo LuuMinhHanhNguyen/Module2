@@ -5,7 +5,7 @@ public interface IProductService {
 
     void addProduct();
 
-    void findProductById();
+    void findProductByName();
     void deleteProduct();
     void editProduct();
     void sortByPrice();
