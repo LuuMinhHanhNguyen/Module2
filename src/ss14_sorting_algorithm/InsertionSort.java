@@ -16,7 +16,8 @@ public class InsertionSort {
                 arr[j] = arr[j + 1];
                 arr[j+1] = temp;
             }
+            System.out.println("The " + i + " sort: " + Arrays.toString(arr));
         }
-        System.out.println(Arrays.toString(arr));
+        System.out.println("After sorting:" + Arrays.toString(arr));
     }
 }

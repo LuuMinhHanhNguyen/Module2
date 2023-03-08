@@ -9,7 +9,7 @@ public class IllegalTriangleException extends Exception{
    public IllegalTriangleException(String message){
        super(message);
    }
-    
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter side1:");
