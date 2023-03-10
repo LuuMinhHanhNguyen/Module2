@@ -30,7 +30,6 @@ public class ReadByteConsole {
 
         byte[] bytes = new byte[105];
         int i = -1;
-
         // Đọc các byte trong luồng và gán lên các phần tử của mảng.
         // Giá trị i là số đọc được của 1 lần. (i sẽ <= 10).
         // Khi không còn phần tử trong luồng i sẽ = -1

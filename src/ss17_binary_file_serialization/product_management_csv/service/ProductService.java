@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class ProductService implements IProductService {
     private final IProductRepository iProductRepository = new ProductRepository();
     private static final Scanner scanner = new Scanner(System.in);
-    public static final String PATH = "src/ss17_binary_file_serialization/product_management_txt/data/ProductManagement.txt";
+    public static final String PATH = "src/ss17_binary_file_serialization/product_management_csv/data/ProductManagement.csv";
 
     public void displayAllProducts(){
         List<Product> products = iProductRepository.getAllProducts();

@@ -18,7 +18,6 @@ public class OutputStreamExample {
         }
         // Đóng luồng đầu ra lại việc ghi xuống file hoàn tất.
         os.close();
-
         InputStream is = new FileInputStream("output.txt");
         byte[] bytes1 = new byte[100];
         int i = -1;

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductRepository implements IProductRepository {
- public static final String PATH = "src/ss17_binary_file_serialization/product_management_txt/data/ProductManagement.txt";
+ public static final String PATH = "src/ss17_binary_file_serialization/product_management_csv/data/ProductManagement.csv";
 
     @Override
     public List<Product> getAllProducts(){
