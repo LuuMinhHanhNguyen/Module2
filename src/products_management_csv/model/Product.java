@@ -1,8 +1,6 @@
-package ss17_binary_file_serialization.product_management_txt.model;
+package products_management_csv.model;
 
-import java.io.Serializable;
-
-public class Product implements Serializable {
+public class Product {
     private int ID;
     private String name;
     private double price;
@@ -71,7 +69,7 @@ public class Product implements Serializable {
                 '}';
     }
 
-//    public String writeToCSV(){
-//        return  ID + "," + name + "," + price + "," + producer + "," + description ;
-//    }
+    public String writeToCSV(){
+        return  ID + "," + name + "," + price + "," + producer + "," + description ;
+    }
 }

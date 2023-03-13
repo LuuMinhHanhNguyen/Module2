@@ -1,0 +1,2 @@
+String serviceType, double usableArea, double price, int capacity,
+case_study.models.TypeOfRenting typeOfRenting,String complimentaryService, SOLAN
