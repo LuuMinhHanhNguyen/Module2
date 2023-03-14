@@ -6,7 +6,6 @@ import case_study.models.Contract;
 import java.util.List;
 
 public class BookingService implements IBookingService{
-    @Override
     public void add() {
 
     }

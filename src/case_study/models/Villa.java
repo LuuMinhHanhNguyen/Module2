@@ -5,7 +5,8 @@ public class Villa extends Facility{
     private double poolArea;
     private int numOfFloors;
 
-    public Villa(String serviceType,
+    public Villa(String serviceID,
+                 String serviceName,
                  double usableArea,
                  double price,
                  int capacity,
@@ -14,7 +15,7 @@ public class Villa extends Facility{
                  double poolArea,
                  int numOfFloors){
 
-        super(serviceType, usableArea, price, capacity, typeOfRenting);
+        super(serviceID, serviceName, usableArea, price, capacity, typeOfRenting);
         this.roomStandard = roomStandard;
         this.poolArea = poolArea;
         this.numOfFloors = numOfFloors;
@@ -46,11 +47,27 @@ public class Villa extends Facility{
 
     @Override
     public String toString() {
-        return "Villa{" +
+        return "Villa(" +
                 super.toString() +
-                "roomStandard='" + roomStandard + '\'' +
+                ", roomStandard='" + roomStandard +
                 ", poolArea=" + poolArea +
                 ", numOfFloors=" + numOfFloors +
-                '}';
+                ") ";
+    }
+
+    public String writeToCSV(){
+        return super.getServiceID() + "," + super.getServiceName() + "," + super.getUsableArea() + "," + super.getPrice() + "," +
+                super.getCapacity() + "," + super.getTypeOfRenting() + "," + roomStandard + "," +
+                poolArea + "," + numOfFloors;
+    }
+
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return this.serviceID.equals(((Villa) other).serviceID);
     }
 }

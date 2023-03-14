@@ -1,7 +1,8 @@
 package case_study.models;
 
 public abstract class Facility {
-    public String serviceType;
+    public String serviceID;
+    public String serviceName;
     public double usableArea;
     public double price;
     public int capacity;
@@ -9,22 +10,32 @@ public abstract class Facility {
 
     public Facility(){}
 
-    public Facility(String serviceType, double usableArea, double price, int capacity, case_study.models.TypeOfRenting typeOfRenting) {
-        this.serviceType = serviceType;
+
+
+    public Facility(String serviceID, String serviceName, double usableArea, double price, int capacity, case_study.models.TypeOfRenting typeOfRenting) {
+        this.serviceID = serviceID;
+        this.serviceName = serviceName;
         this.usableArea = usableArea;
         this.price = price;
         this.capacity = capacity;
         TypeOfRenting = typeOfRenting;
     }
 
-    public String getServiceType() {
-        return serviceType;
+    public String getServiceID() {
+        return serviceID;
     }
 
-    public void setServiceType(String serviceType) {
-        this.serviceType = serviceType;
+    public void setServiceID(String serviceID) {
+        this.serviceID = serviceID;
     }
 
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
     public double getUsableArea() {
         return usableArea;
     }
@@ -59,12 +70,16 @@ public abstract class Facility {
 
     @Override
     public String toString() {
-        return "serviceType='" + serviceType + '\'' +
-                ", usableArea=" + usableArea +
-                ", price=" + price +
-                ", capacity=" + capacity +
-                ", TypeOfRenting=" + TypeOfRenting;
+        return "serviceID : " + serviceID +
+                ", serviceName : " + serviceName +
+                ", usableArea : " + usableArea +
+                ", price : " + price +
+                ", capacity : " + capacity +
+                ", TypeOfRenting : " + TypeOfRenting;
     }
+
+
+
 }
 
 

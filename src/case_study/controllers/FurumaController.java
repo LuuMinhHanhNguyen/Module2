@@ -1,9 +1,12 @@
 package case_study.controllers;
 
-import case_study.services.CustomerService;
-import case_study.services.EmployeeService;
-import case_study.services.ICustomerService;
-import case_study.services.IEmployeeService;
+import case_study.services.*;
+import case_study.services.houses.HouseService;
+import case_study.services.houses.IHouseService;
+import case_study.services.room.IRoomService;
+import case_study.services.room.RoomService;
+import case_study.services.villa.IVillaService;
+import case_study.services.villa.VillaService;
 
 import java.util.Scanner;
 
@@ -12,6 +15,11 @@ public class FurumaController {
     private static String input = "";
     private static IEmployeeService employeeService = new EmployeeService();
     private static ICustomerService customerService = new CustomerService();
+    private static IRoomService iRoomService = new RoomService();
+    private static IVillaService iVillaService = new VillaService();
+    private static IHouseService iHouseService = new HouseService();
+
+    private static IFacilityService iFacilityService = new FacilityService();
     public static void main(String[] args) {
 
         displayMainMenu();
@@ -97,8 +105,8 @@ public class FurumaController {
             System.out.print("Choose your number here:");
             input = scanner.nextLine();
             switch (input){
-                case "1": System.out.println("hihi"); break;
-                case "2": System.out.println("hihhi"); break;
+                case "1": iFacilityService.display(); break;
+                case "2": displayAddNewFacilityMenu(); break;
                 case "3": System.out.println("hihhhi"); break;
                 case "4":
                     displayMainMenu();
@@ -138,8 +146,8 @@ public class FurumaController {
         do {
             System.out.println("===================================");
             System.out.println("**** Promotion Management *****");
-            System.out.println("1. Display list of customers.csv using service:");
-            System.out.println("2. Display list of customers.csv getting vouchers:");
+            System.out.println("1. Display list of customers using service:");
+            System.out.println("2. Display list of customers getting vouchers:");
             System.out.println("3. Return main menu:");
             System.out.print("Choose your number here:");
             input = scanner.nextLine();
@@ -152,6 +160,29 @@ public class FurumaController {
             }
         } while (!input.equals("3"));
     }
+
+    public static void displayAddNewFacilityMenu(){
+        do {
+            System.out.println("===================================");
+            System.out.println("**** Add New Facility *****");
+            System.out.println("1. Add New Villa:");
+            System.out.println("2. Add New Room:");
+            System.out.println("3. Add New House:");
+            System.out.println("4. Back to Facility Management Menu:");
+            System.out.print("Choose your number here:");
+            input = scanner.nextLine();
+            switch (input){
+                case "1": iVillaService.addNewVilla(); break;
+                case "2": iRoomService.addNewRoom(); break;
+                case "3": iHouseService.addNewHouse(); break;
+                case "4":
+                    displayFacilityManagementMenu();
+                    return;
+            }
+        } while (!input.equals("4"));
+    }
+
+
 
 
 }
