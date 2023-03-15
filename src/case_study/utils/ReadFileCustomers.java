@@ -24,8 +24,9 @@ public class ReadFileCustomers {
                 bufferedReader = new BufferedReader(new FileReader(PATH));
                 while ((line = bufferedReader.readLine()) != null){
                     temp = line.split(",");
-                    customer = new Customer(Integer.parseInt(temp[0]), temp[1], temp[2], Boolean.parseBoolean(temp[3]),
-                            temp[4], temp[5], Integer.parseInt(temp[6]), temp[7], Enum.valueOf(CustomerType.class, temp[8]));
+                    customer = new Customer(Integer.parseInt(temp[0]), temp[1], Utils.parseStringToLocalDate(temp[2]),
+                            Boolean.parseBoolean(temp[3]), temp[4], temp[5],
+                            Integer.parseInt(temp[6]), temp[7], Enum.valueOf(CustomerType.class, temp[8]));
                     customers.add(customer);
                 }
             } catch (FileNotFoundException e) {

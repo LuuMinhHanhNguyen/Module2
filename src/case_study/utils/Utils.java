@@ -1,5 +1,8 @@
 package case_study.utils;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,5 +26,25 @@ public class Utils {
         Pattern pattern = Pattern.compile("^[A-Z][a-z]+");
         Matcher matcher = pattern.matcher(serviceName);
         return matcher.matches();
+    }
+
+    public static String parseLocalDateToString(LocalDate date){
+
+
+        DateTimeFormatter simpleDateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        return simpleDateFormat.format(date);
+    }
+
+    public static LocalDate parseStringToLocalDate(String dateInString){
+        DateTimeFormatter simpleDateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate result = null;
+        try{
+            result =  LocalDate.parse(dateInString, simpleDateFormat);
+        } catch (DateTimeParseException e){
+            // check format of LocalDate but cannot check valid range for dd // MM
+            System.out.println("Please fix your DOB format as follows: dd-MM-yyyy (11-01-1990)");
+        }
+        return result;
     }
 }

@@ -4,6 +4,7 @@ import case_study.models.House;
 import case_study.models.TypeOfRenting;
 import case_study.repository.house.HouseRepository;
 import case_study.repository.house.IHouseRepository;
+import case_study.utils.UserException;
 import case_study.utils.Utils;
 
 import java.util.Map;
@@ -26,6 +27,7 @@ public class HouseService implements IHouseService{
 
     @Override
     public void addNewHouse() {
+        // service ID
         System.out.println("Enter your house's service ID here: (SVHO-1234)");
         String serviceID = scanner.nextLine();
         while (!Utils.validateServiceID(serviceID, "HO")){
@@ -33,24 +35,67 @@ public class HouseService implements IHouseService{
             serviceID = scanner.nextLine();
         }
 
-
-        System.out.println("Enter your house's service name here: (Xxxxx)");
+        //service name
+        System.out.println("Enter your house's service name here: (Xxxxx...)");
         String serviceName = scanner.nextLine();
         while (!Utils.validateServiceName(serviceName)){
-            System.out.println("Please re-enter your house's service name here: (Xxxxx)");
+            System.out.println("Please re-enter your house's service name here: (Xxxxx...)");
             serviceName = scanner.nextLine();
         }
 
+        //usable area
+        boolean flag;
+        double area = 0;
+        do{
+            try{
+                System.out.println("Enter your house's area here: ( > 30.0 )");
+                area = Double.parseDouble(scanner.nextLine());
+                if(area <= 30.0) throw new UserException("Your input area should be greater than 30.0!");
+                flag = true;
+            } catch (NumberFormatException e){
+                System.out.println("Your input area should be a decimal number!");
+                flag = false;
+            } catch (UserException e) {
+                System.out.println(e.getMessage());
+                flag = false;
+            }
+        } while (!flag);
 
-        System.out.println("Enter your house's area here:");
-        double area = Double.parseDouble(scanner.nextLine());
+        //price
+        double price = 0;
+        do{
+            try{
+                System.out.println("Enter your house's price:");
+                price = Double.parseDouble(scanner.nextLine());
+                if(price < 0) throw new UserException("Your input price should be a decimal number greater than or equal to 0!");
+                flag = true;
+            } catch (NumberFormatException e){
+                System.out.println("Your input price should be a decimal number!");
+                flag = false;
+            } catch (UserException e) {
+                System.out.println(e.getMessage());
+                flag = false;
+            }
+        } while (!flag);
 
-        System.out.println("Enter your house's price:");
-        double price = Double.parseDouble(scanner.nextLine());
+        //capacity
+        int capacity = 0;
+        do{
+            try {
+                System.out.println("Enter your house's capacity here:");
+                capacity = Integer.parseInt(scanner.nextLine());
+                if(capacity <= 0 || capacity >= 20) throw new UserException("Capacity should be from 1 to 19!");
+                flag = true;
+            } catch (NumberFormatException e){
+                System.out.println("Your input capacity should be an integer!");
+                flag = false;
+            } catch (UserException e) {
+                System.out.println(e.getMessage());
+                flag = false;
+            }
+        }while (!flag);
 
-        System.out.println("Enter your house's capacity here:");
-        int capacity = Integer.parseInt(scanner.nextLine());
-
+        // type of renting
         System.out.println("Enter type of renting for your house:");
         System.out.println("Choose a number: \n" +
                 "1 - YEAR,\n" +
@@ -64,11 +109,30 @@ public class HouseService implements IHouseService{
         else if (temp.equals("3")) typeOfRenting = TypeOfRenting.DAY;
         else typeOfRenting = TypeOfRenting.HOUR;
 
-        System.out.println("Enter your house's standard");
+        //standard
+        System.out.println("Enter your house's standard: (Xxxxx...)");
         String standard = scanner.nextLine();
+        while (!Utils.validateServiceName(standard)){
+            System.out.println("Please re-enter your house's standard: (Xxxxx...)");
+            standard = scanner.nextLine();
+        }
 
-        System.out.println("Enter number of floors for your house:");
-        int numOfFloors = Integer.parseInt(scanner.nextLine());
+        //numOfFloors
+        int numOfFloors = 0;
+        do{
+            try{
+                System.out.println("Enter number of floors for your house:");
+                numOfFloors = Integer.parseInt(scanner.nextLine());
+                if(numOfFloors <= 0) throw new UserException("Your input price should be an integer greater than 0!");
+                flag = true;
+            } catch (NumberFormatException e){
+                System.out.println("Your input price should be an integer!");
+                flag = false;
+            } catch (UserException e) {
+                System.out.println(e.getMessage());
+                flag = false;
+            }
+        } while (!flag);
 
         House house = new House(serviceID,serviceName, area, price,capacity, typeOfRenting, standard, numOfFloors);
         if(houses.containsKey(house)) System.out.println("This House already exists in the system!");

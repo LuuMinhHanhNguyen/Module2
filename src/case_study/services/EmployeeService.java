@@ -2,11 +2,14 @@ package case_study.services;
 
 import case_study.repository.EmployeeRepository;
 import case_study.repository.IEmployeeRepository;
+import case_study.utils.Utils;
 import case_study.utils.WriteFileEmployees;
 import case_study.models.EducationBackground;
 import case_study.models.Employee;
 import case_study.models.Title;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,6 +21,12 @@ public class EmployeeService implements IEmployeeService {
 
     public void add() {
         Employee newEmployee = getInfoAndReturnAnEmployee();
+        for (int i = 0; i < employees.size(); i++) {
+            if (employees.get(i).getID() == newEmployee.getID() || employees.get(i).getEmployeeID() == newEmployee.getEmployeeID()) {
+                System.out.println("You cannot use this ID / employee number because it already exists in the system!");
+                return;
+            }
+        }
         employees.add(newEmployee);
         iEmployeeRepository.add(employees);
         System.out.println("Employee added!");
@@ -28,7 +37,7 @@ public class EmployeeService implements IEmployeeService {
         if (employees.isEmpty()) System.out.println("There is no employee in the system! Please add some!");
         else {
             System.out.println("List of Employees");
-            for (Employee employee: employees) {
+            for (Employee employee : employees) {
                 System.out.println(employee);
             }
         }
@@ -39,17 +48,24 @@ public class EmployeeService implements IEmployeeService {
         Employee editedEmployee;
         Employee temp;
         int index;
+        int employeeNum;
 
         System.out.println("Enter employee number here to edit");
-        int employeeNum = Integer.parseInt(scanner.nextLine());
+        employeeNum = Integer.parseInt(scanner.nextLine());
 
-        if(iEmployeeRepository.edit(employeeNum) == -1){
+        if (iEmployeeRepository.edit(employeeNum) == -1) {
             System.out.println("Can not find any employee with that ID!");
         } else {
             index = iEmployeeRepository.edit(employeeNum);
             editedEmployee = employees.get(index);
             System.out.println("Employee Information: " + editedEmployee.toString());
             temp = getInfoAndReturnAnEmployee();
+            for (int i = 0; i < employees.size(); i++) {
+                if (employees.get(i).getID() == temp.getID() || employees.get(i).getEmployeeID() == temp.getEmployeeID()) {
+                    System.out.println("You cannot use this ID / employee number because it already exists in the system!");
+                    return;
+                }
+            }
             editedEmployee = temp;
             employees.set(index, editedEmployee);
             WriteFileEmployees.write(employees);
@@ -58,7 +74,7 @@ public class EmployeeService implements IEmployeeService {
     }
 
 
-    private Employee getInfoAndReturnAnEmployee(){
+    private Employee getInfoAndReturnAnEmployee() {
         System.out.println("Enter employee's ID here:");
         int ID = Integer.parseInt(scanner.nextLine());
 
@@ -66,8 +82,19 @@ public class EmployeeService implements IEmployeeService {
         System.out.println("Enter employee's name here:");
         String name = scanner.nextLine();
 
-        System.out.println("Enter employee's DOB here:");
+
+        // LocalTime - DOB
+        LocalDate now = LocalDate.now();
+        System.out.println("Enter customer's DOB here:");
         String DOB = scanner.nextLine();
+        while (Utils.parseStringToLocalDate(DOB) == null
+                || Period.between(Utils.parseStringToLocalDate(DOB), now).getYears() < 18
+                || Period.between(Utils.parseStringToLocalDate(DOB), now).getYears() > 100) {
+            System.out.println("Age should be from 18 to 100!");
+            DOB = scanner.nextLine();
+        }
+        LocalDate finalDOB = Utils.parseStringToLocalDate(DOB);
+
 
         System.out.println("Enter employee's gender here: \n" +
                 "1 - MALE \n" +
@@ -119,7 +146,9 @@ public class EmployeeService implements IEmployeeService {
         System.out.println("Enter employee's salary here:");
         double salary = Double.parseDouble(scanner.nextLine());
 
-        Employee employee = new Employee(ID, name, DOB, gender, phoneNumber, email, employeeID, educationBackground, title, salary);
+        Employee employee = new Employee(ID, name, finalDOB, gender, phoneNumber, email, employeeID, educationBackground, title, salary);
         return employee;
     }
+
+
 }

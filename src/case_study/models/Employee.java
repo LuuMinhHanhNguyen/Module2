@@ -1,5 +1,9 @@
 package case_study.models;
 
+import case_study.utils.Utils;
+
+import java.time.LocalDate;
+
 public class Employee extends Person{
     private int employeeID;
     private EducationBackground educationBackground;
@@ -7,7 +11,7 @@ public class Employee extends Person{
     private double salary;
     public Employee(){}
 
-    public Employee(int ID, String name, String DOB, Boolean gender, String phoneNumber, String email,
+    public Employee(int ID, String name, LocalDate DOB, Boolean gender, String phoneNumber, String email,
                     int employeeID, EducationBackground educationBackground, Title title, double salary){
         super(ID, name, DOB, gender, phoneNumber, email);
         this.employeeID = employeeID;
@@ -60,7 +64,7 @@ public class Employee extends Person{
     }
 
     public String writeToCSV(){
-        return super.getID() + "," + super.getName() + "," + super.getDOB() + "," + super.getGender() + "," +
+        return super.getID() + "," + super.getName() + "," + Utils.parseLocalDateToString(super.getDOB()) + "," + super.getGender() + "," +
                 super.getPhoneNumber() + "," + super.getEmail() + "," +
                 employeeID + "," + educationBackground + "," + title + "," + salary;
     }

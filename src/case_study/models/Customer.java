@@ -1,11 +1,15 @@
 package case_study.models;
 
+import case_study.utils.Utils;
+
+import java.time.LocalDate;
+
 public class Customer extends Person{
     private int customerID;
     private String address;
     private CustomerType customerType;
 
-    public Customer(int ID, String name, String DOB, Boolean gender, String phoneNumber, String email,
+    public Customer(int ID, String name, LocalDate DOB, Boolean gender, String phoneNumber, String email,
                     int customerID, String address, CustomerType customerType){
         super(ID, name, DOB, gender, phoneNumber, email);
         this.customerID = customerID;
@@ -42,14 +46,14 @@ public class Customer extends Person{
     public String toString() {
         return "Customer{" +
                 super.toString() +
-                "customerID=" + customerID +
+                ", customerID=" + customerID +
                 ", address='" + address + '\'' +
                 ", customerType=" + customerType +
                 '}';
     }
 
     public String writeToCSV(){
-        return super.getID() + "," + super.getName() + "," + super.getDOB() + "," + super.getGender() + "," +
+        return super.getID() + "," + super.getName() + "," + Utils.parseLocalDateToString(super.getDOB()) + "," + super.getGender() + "," +
                 super.getPhoneNumber() + "," + super.getEmail() + "," +
                 customerID + "," + address + "," + customerType;
     }

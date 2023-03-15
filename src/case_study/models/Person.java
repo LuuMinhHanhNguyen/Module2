@@ -1,9 +1,14 @@
 package case_study.models;
 
+import case_study.utils.Utils;
+
+import java.time.LocalDate;
+import java.util.Date;
+
 public abstract class Person {
     private int ID;
     private String name;
-    private String DOB;
+    private LocalDate DOB;
     private Boolean gender;
     private String phoneNumber;
     private String email;
@@ -11,7 +16,7 @@ public abstract class Person {
 
     }
 
-    public Person(int ID, String name, String DOB, Boolean gender, String phoneNumber, String email){
+    public Person(int ID, String name, LocalDate DOB, Boolean gender, String phoneNumber, String email){
         this.ID = ID;
         this.name = name;
         this.DOB = DOB;
@@ -36,11 +41,11 @@ public abstract class Person {
         this.name = name;
     }
 
-    public String getDOB() {
+    public LocalDate getDOB() {
         return DOB;
     }
 
-    public void setDOB(String DOB) {
+    public void setDOB(LocalDate DOB) {
         this.DOB = DOB;
     }
 
@@ -72,7 +77,7 @@ public abstract class Person {
     public String toString() {
         return "ID=" + ID +
                 ", name='" + name + '\'' +
-                ", DOB='" + DOB + '\'' +
+                ", DOB='" + Utils.parseLocalDateToString(DOB) + '\'' +
                 ", gender=" + gender +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'';

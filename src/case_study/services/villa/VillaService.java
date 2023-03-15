@@ -36,10 +36,10 @@ public class VillaService implements IVillaService{
         }
 
 
-        System.out.println("Enter your villa's service name here: (Xxxxx)");
+        System.out.println("Enter your villa's service name here: (Xxxxx...)");
         String serviceName = scanner.nextLine();
         while (!Utils.validateServiceName(serviceName)){
-            System.out.println("Please re-enter your villa's service name here: (Xxxxx)");
+            System.out.println("Please re-enter your villa's service name here: (Xxxxx...)");
             serviceName = scanner.nextLine();
         }
 
@@ -61,12 +61,39 @@ public class VillaService implements IVillaService{
         } while (!flag);
 
 
+        double price = 0;
+        do{
+            try{
+                System.out.println("Enter your villa's price:");
+                price = Double.parseDouble(scanner.nextLine());
+                if(price < 0) throw new UserException("Your input price should be a decimal number greater than or equal to 0!");
+                flag = true;
+            } catch (NumberFormatException e){
+                System.out.println("Your input price should be a decimal number!");
+                flag = false;
+            } catch (UserException e) {
+                System.out.println(e.getMessage());
+                flag = false;
+            }
+        } while (!flag);
 
-        System.out.println("Enter your villa's price:");
-        double price = Double.parseDouble(scanner.nextLine());
 
-        System.out.println("Enter your villa's capacity here:");
-        int capacity = Integer.parseInt(scanner.nextLine());
+        int capacity = 0;
+        do{
+            try {
+                System.out.println("Enter your villa's capacity here:");
+                capacity = Integer.parseInt(scanner.nextLine());
+                if(capacity <= 0 || capacity >= 20) throw new UserException("Capacity should be from 1 to 19!");
+                flag = true;
+            } catch (NumberFormatException e){
+                System.out.println("Your input capacity should be an integer!");
+                flag = false;
+            } catch (UserException e) {
+                System.out.println(e.getMessage());
+                flag = false;
+            }
+        }while (!flag);
+
 
         System.out.println("Enter type of renting for your villa:");
         System.out.println("Choose a number: \n" +
@@ -81,14 +108,47 @@ public class VillaService implements IVillaService{
         else if (temp.equals("3")) typeOfRenting = TypeOfRenting.DAY;
         else typeOfRenting = TypeOfRenting.HOUR;
 
-        System.out.println("Enter your villa's standard");
+        System.out.println("Enter your villa's standard: (Xxxxx...)");
         String standard = scanner.nextLine();
+        while (!Utils.validateServiceName(standard)){
+            System.out.println("Please re-enter your villa's standard: (Xxxxx...)");
+            standard = scanner.nextLine();
+        }
 
-        System.out.println("Enter pool area for your villa:");
-        double poolArea = Double.parseDouble(scanner.nextLine());
 
-        System.out.println("Enter number of floors for your villa:");
-        int numOfFloors = Integer.parseInt(scanner.nextLine());
+        double poolArea = 0;
+        do{
+            try{
+                System.out.println("Enter your villa's pool area here: ( > 30.0 )");
+                poolArea = Double.parseDouble(scanner.nextLine());
+                if(poolArea <= 30.0) throw new UserException("Your input pool area should be greater than 30.0!");
+                flag = true;
+            } catch (NumberFormatException e){
+                System.out.println("Your input area should be a decimal number!");
+                flag = false;
+            } catch (UserException e) {
+                System.out.println(e.getMessage());
+                flag = false;
+            }
+        } while (!flag);
+
+
+        int numOfFloors = 0;
+        do{
+            try{
+                System.out.println("Enter number of floors for your villa:");
+                numOfFloors = Integer.parseInt(scanner.nextLine());
+                if(numOfFloors <= 0) throw new UserException("Your input price should be an integer greater than 0!");
+                flag = true;
+            } catch (NumberFormatException e){
+                System.out.println("Your input price should be an integer!");
+                flag = false;
+            } catch (UserException e) {
+                System.out.println(e.getMessage());
+                flag = false;
+            }
+        } while (!flag);
+
 
         Villa villa = new Villa(serviceID,serviceName, area, price,capacity, typeOfRenting, standard, poolArea, numOfFloors);
         if(villas.containsKey(villa)) System.out.println("This villa already exists in the system!");
