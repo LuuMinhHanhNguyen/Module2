@@ -38,7 +38,7 @@ public class HouseService implements IHouseService{
         //service name
         System.out.println("Enter your house's service name here: (Xxxxx...)");
         String serviceName = scanner.nextLine();
-        while (!Utils.validateServiceName(serviceName)){
+        while (!Utils.validateName(serviceName)){
             System.out.println("Please re-enter your house's service name here: (Xxxxx...)");
             serviceName = scanner.nextLine();
         }
@@ -112,7 +112,7 @@ public class HouseService implements IHouseService{
         //standard
         System.out.println("Enter your house's standard: (Xxxxx...)");
         String standard = scanner.nextLine();
-        while (!Utils.validateServiceName(standard)){
+        while (!Utils.validateName(standard)){
             System.out.println("Please re-enter your house's standard: (Xxxxx...)");
             standard = scanner.nextLine();
         }
@@ -123,10 +123,10 @@ public class HouseService implements IHouseService{
             try{
                 System.out.println("Enter number of floors for your house:");
                 numOfFloors = Integer.parseInt(scanner.nextLine());
-                if(numOfFloors <= 0) throw new UserException("Your input price should be an integer greater than 0!");
+                if(numOfFloors <= 0) throw new UserException("Number of floors should be an integer greater than 0!");
                 flag = true;
             } catch (NumberFormatException e){
-                System.out.println("Your input price should be an integer!");
+                System.out.println("Number of floors should be an integer!");
                 flag = false;
             } catch (UserException e) {
                 System.out.println(e.getMessage());

@@ -37,7 +37,7 @@ public class RoomService implements IRoomService{
 
         System.out.println("Enter your room's service name here: (Xxxxx...)");
         String serviceName = scanner.nextLine();
-        while (!Utils.validateServiceName(serviceName)){
+        while (!Utils.validateName(serviceName)){
             System.out.println("Please re-enter your room's service name here: (Xxxxx...)");
             serviceName = scanner.nextLine();
         }

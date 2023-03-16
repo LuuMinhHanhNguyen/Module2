@@ -18,7 +18,7 @@ public class CustomerService implements ICustomerService {
     Scanner scanner = new Scanner(System.in);
 
     public void add() {
-        Customer newCustomer = getInfoAndReturnACustomer();
+        Customer newCustomer = getInfoAndReturnACustomer(true);
         for (int i = 0; i < customers.size(); i++) {
             if (customers.get(i).getID() == newCustomer.getID() || customers.get(i).getCustomerID() == newCustomer.getCustomerID()) {
                 System.out.println("You cannot use this ID / customer number because it already exists in the system!");
@@ -46,17 +46,30 @@ public class CustomerService implements ICustomerService {
         Customer editedCustomer;
         Customer temp;
         int index;
+        int searchCustomerNumber = 0;
+        int oldCustomerNum;
+        boolean flag;
 
-        System.out.println("Please enter customer number here to edit:");
-        int customerNumber = Integer.parseInt(scanner.nextLine());
+        do{
+            try{
+                System.out.println("Please enter customer number here to edit:");
+                searchCustomerNumber = Integer.parseInt(scanner.nextLine());
+                flag = true;
+            } catch (NumberFormatException e){
+                System.out.println("Numbers only!");
+                flag = false;
+            }
+        }while (!flag);
 
-        if (iCustomerRepository.edit(customerNumber) == -1) {
+
+        if (iCustomerRepository.edit(searchCustomerNumber) == -1) {
             System.out.println("There is no customer matching that ID!");
         } else {
-            index = iCustomerRepository.edit(customerNumber);
+            index = iCustomerRepository.edit(searchCustomerNumber);
             editedCustomer = customers.get(index);
+            oldCustomerNum = editedCustomer.getCustomerID();
             System.out.println("Customer Info: " + editedCustomer);
-            temp = getInfoAndReturnACustomer();
+            temp = getInfoAndReturnACustomer(false);
             for (int i = 0; i < customers.size(); i++) {
                 if (customers.get(i).getID() == temp.getID() || customers.get(i).getCustomerID() == temp.getCustomerID()) {
                     System.out.println("You cannot use this ID / customer number because it already exists in the system!");
@@ -64,21 +77,35 @@ public class CustomerService implements ICustomerService {
                 }
             }
             editedCustomer = temp;
+            editedCustomer.setCustomerID(oldCustomerNum);
             customers.set(index, editedCustomer);
             WriteFileCustomers.write(customers);
-            System.out.println("Customer added!");
+            System.out.println("Customer edited!");
         }
     }
 
-    private Customer getInfoAndReturnACustomer() {
+    private Customer getInfoAndReturnACustomer(boolean isAll) {
+        boolean flag;
 
-        System.out.println("Enter customer's ID here:");
-        int ID = Integer.parseInt(scanner.nextLine());
+        int ID = 0;
+        do{
+            try {
+                System.out.println("Enter customer's ID here:");
+                 ID = Integer.parseInt(scanner.nextLine());
+                 flag = true;
+            } catch (NumberFormatException e){
+                System.out.println("Customer's ID must be numbers!");
+                flag = false;
+            }
+        }while (!flag);
 
 
         System.out.println("Enter customer's name here:");
         String name = scanner.nextLine();
-
+        while (!Utils.validateName(name)){
+            System.out.println("Please re-enter your name here: (Xxxx....)");
+            name = scanner.nextLine();
+        }
 
         // LocalTime - DOB
         LocalDate now = LocalDate.now();
@@ -90,7 +117,7 @@ public class CustomerService implements ICustomerService {
             System.out.println("Age should be from 18 to 100!");
             DOB = scanner.nextLine();
         }
-        System.out.println(Period.between(Utils.parseStringToLocalDate(DOB), now).getYears());
+       // System.out.println(Period.between(Utils.parseStringToLocalDate(DOB), now).getYears());
         LocalDate finalDOB = Utils.parseStringToLocalDate(DOB);
 
 
@@ -106,13 +133,36 @@ public class CustomerService implements ICustomerService {
 
         System.out.println("Enter customer's phone number here:");
         String phoneNumber = scanner.nextLine();
+        while (!Utils.validatePhoneNumber(phoneNumber)){
+            System.out.println("Please re-enter customer's phone number here: (0909090909)");
+            phoneNumber = scanner.nextLine();
+        }
 
         System.out.println("Enter customer's email here:");
         String email = scanner.nextLine();
+        while (!Utils.validateEmail(email)){
+            System.out.println("Please re-enter employee's email here: (abb@gmail.com)");
+            email = scanner.nextLine();
+        }
 
-        System.out.println("Enter customer number here:");
-        int customerID = Integer.parseInt(scanner.nextLine());
+        // customer number
+        int customerID = -1;
+        if(isAll){
 
+            do{
+                try {
+                    System.out.println("Enter customer number here:");
+                    customerID = Integer.parseInt(scanner.nextLine());
+                    flag = true;
+                } catch (NumberFormatException e){
+                    System.out.println("Customer number must be numbers!");
+                    flag = false;
+                }
+            } while (!flag);
+
+        }
+
+        // customer's address
         System.out.println("Enter customer's address here:");
         String address = scanner.nextLine();
 

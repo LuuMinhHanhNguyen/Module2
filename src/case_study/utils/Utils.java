@@ -22,12 +22,23 @@ public class Utils {
         return matcher.matches();
     }
 
-    public static boolean validateServiceName(String serviceName){
+    public static boolean validateName(String serviceName){
         Pattern pattern = Pattern.compile("^[A-Z][a-z]+");
         Matcher matcher = pattern.matcher(serviceName);
         return matcher.matches();
     }
 
+    public static boolean validatePhoneNumber(String phoneNum){
+        Pattern pattern = Pattern.compile("^0[0-9]{9}$");
+        Matcher matcher = pattern.matcher(phoneNum);
+        return matcher.matches();
+    }
+
+    public static boolean validateEmail(String email){
+        Pattern pattern = Pattern.compile("^\\w+@\\w+.com$");
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
     public static String parseLocalDateToString(LocalDate date){
 
 

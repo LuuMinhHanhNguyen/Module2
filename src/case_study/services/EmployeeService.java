@@ -20,7 +20,7 @@ public class EmployeeService implements IEmployeeService {
     private static List<Employee> employees = iEmployeeRepository.getAll();
 
     public void add() {
-        Employee newEmployee = getInfoAndReturnAnEmployee();
+        Employee newEmployee = getInfoAndReturnAnEmployee(true);
         for (int i = 0; i < employees.size(); i++) {
             if (employees.get(i).getID() == newEmployee.getID() || employees.get(i).getEmployeeID() == newEmployee.getEmployeeID()) {
                 System.out.println("You cannot use this ID / employee number because it already exists in the system!");
@@ -48,18 +48,30 @@ public class EmployeeService implements IEmployeeService {
         Employee editedEmployee;
         Employee temp;
         int index;
-        int employeeNum;
+        int employeeNum = 0;
+        int oldEmployeeNum;
+        boolean flag;
 
-        System.out.println("Enter employee number here to edit");
-        employeeNum = Integer.parseInt(scanner.nextLine());
+        do{
+            try{
+                System.out.println("Enter employee number here to edit");
+                employeeNum = Integer.parseInt(scanner.nextLine());
+                flag = true;
+            }catch (NumberFormatException e){
+                System.out.println("Numbers only!");
+                flag = false;
+            }
+        }while (!flag);
+
 
         if (iEmployeeRepository.edit(employeeNum) == -1) {
             System.out.println("Can not find any employee with that ID!");
         } else {
             index = iEmployeeRepository.edit(employeeNum);
             editedEmployee = employees.get(index);
+            oldEmployeeNum = editedEmployee.getEmployeeID();
             System.out.println("Employee Information: " + editedEmployee.toString());
-            temp = getInfoAndReturnAnEmployee();
+            temp = getInfoAndReturnAnEmployee(false);
             for (int i = 0; i < employees.size(); i++) {
                 if (employees.get(i).getID() == temp.getID() || employees.get(i).getEmployeeID() == temp.getEmployeeID()) {
                     System.out.println("You cannot use this ID / employee number because it already exists in the system!");
@@ -67,6 +79,7 @@ public class EmployeeService implements IEmployeeService {
                 }
             }
             editedEmployee = temp;
+            editedEmployee.setEmployeeID(oldEmployeeNum);
             employees.set(index, editedEmployee);
             WriteFileEmployees.write(employees);
             System.out.println("Employee edited!");
@@ -74,13 +87,28 @@ public class EmployeeService implements IEmployeeService {
     }
 
 
-    private Employee getInfoAndReturnAnEmployee() {
-        System.out.println("Enter employee's ID here:");
-        int ID = Integer.parseInt(scanner.nextLine());
+    private Employee getInfoAndReturnAnEmployee(boolean isAll) {
+        boolean flag;
+        int ID = 0;
+        do{
+            try{
+                System.out.println("Enter employee's ID here:");
+                 ID = Integer.parseInt(scanner.nextLine());
+                flag = true;
+            } catch (NumberFormatException e){
+                System.out.println("Employee's ID should be numbers!:");
+                flag = false;
+            }
+        } while (!flag);
+
 
 
         System.out.println("Enter employee's name here:");
         String name = scanner.nextLine();
+        while (!Utils.validateName(name)){
+            System.out.println("Please re-enter employee's name here: (Xxxxx...)");
+            name = scanner.nextLine();
+        }
 
 
         // LocalTime - DOB
@@ -106,14 +134,40 @@ public class EmployeeService implements IEmployeeService {
         else if (tempGender.equals("2")) gender = false;
         else gender = null;
 
+
         System.out.println("Enter employee's phone number here:");
         String phoneNumber = scanner.nextLine();
+        while (!Utils.validatePhoneNumber(phoneNumber)){
+            System.out.println("Please re-enter employee's phone number here: (0909090909)");
+            phoneNumber = scanner.nextLine();
+        }
+
 
         System.out.println("Enter employee's email here:");
         String email = scanner.nextLine();
+        while (!Utils.validateEmail(email)){
+            System.out.println("Please re-enter employee's email here: (abb@gmail.com)");
+            email = scanner.nextLine();
+        }
 
-        System.out.println("Enter employee number here:");
-        int employeeID = Integer.parseInt(scanner.nextLine());
+
+        // employee number
+        int employeeID = -1;
+        if(isAll){
+
+            do{
+                try{
+                    System.out.println("Enter employee number here:");
+                    employeeID = Integer.parseInt(scanner.nextLine());
+                    flag = true;
+                } catch (NumberFormatException e){
+                    System.out.println("Employee number must be numbers!");
+                    flag = false;
+                }
+            } while (!flag);
+        }
+
+
 
         System.out.println("Enter employee's education background here: \n" +
                 "1 - INTERMEDIATE,\n" +
@@ -126,6 +180,7 @@ public class EmployeeService implements IEmployeeService {
         else if (tempEduBackground.equals("2")) educationBackground = EducationBackground.COLLEGE;
         else if (tempEduBackground.equals("3")) educationBackground = EducationBackground.UNIVERSITY;
         else educationBackground = EducationBackground.POSTGRADUATE;
+
 
         System.out.println("Enter employee's title here: \n" +
                 "1 - RECEPTIONIST,\n" +
@@ -143,8 +198,18 @@ public class EmployeeService implements IEmployeeService {
         else if (tempTitle.equals("5")) title = Title.MANAGER;
         else title = Title.DIRECTOR;
 
-        System.out.println("Enter employee's salary here:");
-        double salary = Double.parseDouble(scanner.nextLine());
+        double salary = 0;
+        do{
+            try{
+                System.out.println("Enter employee's salary here:");
+                salary = Double.parseDouble(scanner.nextLine());
+                flag = true;
+            } catch (NumberFormatException e){
+                System.out.println("Employee's salary must be a decimal number!:");
+                flag = false;
+            }
+        } while (!flag);
+
 
         Employee employee = new Employee(ID, name, finalDOB, gender, phoneNumber, email, employeeID, educationBackground, title, salary);
         return employee;
