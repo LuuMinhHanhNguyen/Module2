@@ -6,9 +6,11 @@ import case_study.repository.villa.IVillaRepository;
 import case_study.repository.villa.VillaRepository;
 import case_study.utils.UserException;
 import case_study.utils.Utils;
+import case_study.utils.WriteFileVilla;
 
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class VillaService implements IVillaService{
     private static Scanner scanner = new Scanner(System.in);
@@ -157,5 +159,31 @@ public class VillaService implements IVillaService{
             iVillaRepository.add(villas);
             System.out.println("Villa added!");
         }
+    }
+
+    @Override
+    public boolean checkServiceNumberForBooking(String serviceNum) {
+        Set<Villa> villaSet = villas.keySet();
+        for (Villa villa: villaSet) {
+            if(villa.serviceID.equals(serviceNum)) return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void updateTimesOfUsingService(String serviceNum) {
+        Set<Villa> villaSet = villas.keySet();
+        Villa updatedVilla = null;
+        // find Villa Object with provided serviceNum
+        for (Villa villa: villaSet) {
+            if(villa.serviceID.equals(serviceNum)){
+                updatedVilla = villa;
+                break;
+            }
+        }
+        // get the using times then add back to the map with increased times by 1
+        int usingTimes = villas.get(updatedVilla);
+        villas.put(updatedVilla, usingTimes + 1);
+        WriteFileVilla.write(villas);
     }
 }

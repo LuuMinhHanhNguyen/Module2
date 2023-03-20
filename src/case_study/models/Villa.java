@@ -52,7 +52,7 @@ public class Villa extends Facility{
                 ", roomStandard='" + roomStandard +
                 ", poolArea=" + poolArea +
                 ", numOfFloors=" + numOfFloors +
-                ") ";
+                "), times of using ";
     }
 
     public String writeToCSV(){

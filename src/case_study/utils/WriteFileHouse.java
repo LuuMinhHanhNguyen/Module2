@@ -14,7 +14,7 @@ public class WriteFileHouse {
         try{
             bufferedWriter = new BufferedWriter(new FileWriter(PATH));
             for (Map.Entry<House, Integer> entry : houses.entrySet()) {
-                bufferedWriter.write(entry.getKey().writeToCSV() + "," + "0");
+                bufferedWriter.write(entry.getKey().writeToCSV() + "," + entry.getValue());
                 bufferedWriter.newLine();
             }
         } catch (IOException e) {

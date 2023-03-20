@@ -5,5 +5,5 @@ import case_study.models.Facility;
 import java.util.List;
 
 public interface IFacilityService extends IServices{
-    List<Facility> displayFacilityMaintenance();
+    void displayFacilityMaintenance();
 }

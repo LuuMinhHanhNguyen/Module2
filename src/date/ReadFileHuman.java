@@ -1,13 +1,12 @@
 package date;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ReadFileHuman {
     private static String PATH = "src/date/human.csv";
-    public static List<Human> read(){
-        List<Human> humans = new ArrayList<>();
+    public static Set<Human> read(){
+        Set<Human> humans = new LinkedHashSet<>();
         Human human;
         String line;
         String[] temp;

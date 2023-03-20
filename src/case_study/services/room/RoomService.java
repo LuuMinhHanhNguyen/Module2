@@ -6,9 +6,11 @@ import case_study.repository.room.IRoomRepository;
 import case_study.repository.room.RoomRepository;
 import case_study.utils.UserException;
 import case_study.utils.Utils;
+import case_study.utils.WriteFileRooms;
 
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class RoomService implements IRoomService{
     private static Scanner scanner = new Scanner(System.in);
@@ -119,5 +121,31 @@ public class RoomService implements IRoomService{
             iRoomRepository.add(rooms);
             System.out.println("Room added!");
         }
+    }
+
+    @Override
+    public boolean checkServiceNumberForBooking(String serviceNum) {
+        Set<Room> roomSet = rooms.keySet();
+        for (Room room: roomSet) {
+            if(room.serviceID.equals(serviceNum)) return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void updateTimesOfUsingService(String serviceNum) {
+        Set<Room> roomSet = rooms.keySet();
+        Room updatedRoom = null;
+        // find Room Object with provided serviceNum
+        for (Room room: roomSet) {
+            if(room.serviceID.equals(serviceNum)){
+                updatedRoom = room;
+                break;
+            }
+        }
+        // get the using times then add back to the map with increased times by 1
+        int usingTimes = rooms.get(updatedRoom);
+        rooms.put(updatedRoom, usingTimes + 1);
+        WriteFileRooms.write(rooms);
     }
 }

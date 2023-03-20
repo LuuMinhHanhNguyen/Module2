@@ -16,7 +16,7 @@ public class WriteFileRooms {
         try{
             bufferedWriter = new BufferedWriter(new FileWriter(PATH));
             for (Map.Entry<Room, Integer> entry : rooms.entrySet()) {
-                bufferedWriter.write(entry.getKey().writeToCSV() + "," + "0");
+                bufferedWriter.write(entry.getKey().writeToCSV() + "," + entry.getValue());
                 bufferedWriter.newLine();
             }
         } catch (IOException e) {

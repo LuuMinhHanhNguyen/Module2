@@ -3,6 +3,7 @@ package case_study.services;
 import case_study.models.*;
 import case_study.repository.CustomerRepository;
 import case_study.repository.ICustomerRepository;
+import case_study.utils.UserException;
 import case_study.utils.Utils;
 import case_study.utils.WriteFileCustomers;
 
@@ -28,6 +29,14 @@ public class CustomerService implements ICustomerService {
         customers.add(newCustomer);
         iCustomerRepository.add(customers);
         System.out.println("Customer added!");
+    }
+
+    @Override
+    public boolean findByCustomerNumber(int customerNum) {
+        for (Customer customer : customers) {
+            if (customer.getCustomerID() == customerNum) return true;
+        }
+        return false;
     }
 
     @Override
@@ -153,10 +162,13 @@ public class CustomerService implements ICustomerService {
                 try {
                     System.out.println("Enter customer number here:");
                     customerID = Integer.parseInt(scanner.nextLine());
+                    if(customerID < 0) throw new UserException("ID cannot be a negative number!");
                     flag = true;
                 } catch (NumberFormatException e){
                     System.out.println("Customer number must be numbers!");
                     flag = false;
+                } catch (UserException e) {
+                    System.out.println(e.getMessage());
                 }
             } while (!flag);
 

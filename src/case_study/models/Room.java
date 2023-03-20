@@ -26,7 +26,7 @@ public class Room extends Facility{
     public String toString() {
         return "Room(" +
                 super.toString() +
-                ", complimentaryService : " + complimentaryService + ") ";
+                ", complimentaryService : " + complimentaryService + "), times of using ";
     }
 
     public String writeToCSV(){
@@ -41,6 +41,6 @@ public class Room extends Facility{
 
     @Override
     public boolean equals(Object other) {
-       return this.serviceID.equals(((Room) other).serviceID);
+        return this.serviceID.equals(((Room) other).serviceID);
     }
 }

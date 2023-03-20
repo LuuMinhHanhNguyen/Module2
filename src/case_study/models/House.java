@@ -1,5 +1,7 @@
 package case_study.models;
 
+import java.util.Objects;
+
 public class House extends Facility{
     private String roomStandard;
     private int numOfFloors;
@@ -38,7 +40,7 @@ public class House extends Facility{
         return "House(" +
                 super.toString() +
                 ", roomStandard : " + roomStandard +
-                ", numOfFloors : " + numOfFloors + ") ";
+                ", numOfFloors : " + numOfFloors + "), times of using ";
     }
 
     public String writeToCSV(){

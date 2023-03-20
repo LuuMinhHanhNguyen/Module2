@@ -2,12 +2,12 @@ package case_study.models;
 
 public class Contract {
     private int contractID;
-    private int bookingID;
+    private String bookingID;
     private int customerID;
     private double deposit;
     private double total;
 
-    public Contract(int contractID, int bookingID, int customerID, double deposit, double total) {
+    public Contract(int contractID, String bookingID, int customerID, double deposit, double total) {
         this.contractID = contractID;
         this.bookingID = bookingID;
         this.customerID = customerID;
@@ -23,11 +23,11 @@ public class Contract {
         this.contractID = contractID;
     }
 
-    public int getBookingID() {
+    public String getBookingID() {
         return bookingID;
     }
 
-    public void setBookingID(int bookingID) {
+    public void setBookingID(String bookingID) {
         this.bookingID = bookingID;
     }
 
@@ -64,5 +64,9 @@ public class Contract {
                 ", deposit=" + deposit +
                 ", total=" + total +
                 '}';
+    }
+
+    public String writeToCSV(){
+        return contractID + "," + bookingID + "," + customerID + "," + deposit + "," + total;
     }
 }

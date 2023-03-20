@@ -6,9 +6,9 @@ import case_study.repository.house.HouseRepository;
 import case_study.repository.house.IHouseRepository;
 import case_study.utils.UserException;
 import case_study.utils.Utils;
+import case_study.utils.WriteFileHouse;
 
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class HouseService implements IHouseService{
     private static Scanner scanner = new Scanner(System.in);
@@ -142,4 +142,32 @@ public class HouseService implements IHouseService{
             System.out.println("House added!");
         }
     }
+
+    @Override
+    public boolean checkServiceNumberForBooking(String serviceNum) {
+        Set<House> houseSet = houses.keySet();
+        for (House house: houseSet) {
+            if(house.serviceID.equals(serviceNum)) return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void updateTimesOfUsingService(String serviceNum) {
+        Set<House> houseSet = houses.keySet();
+        House updatedHouse = null;
+        // find House Object with provided serviceNum
+        for (House house: houseSet) {
+            if(house.serviceID.equals(serviceNum)){
+                updatedHouse = house;
+                break;
+            }
+        }
+        // get the using times then add back to the map with increased times by 1
+        int usingTimes = houses.get(updatedHouse);
+        houses.put(updatedHouse, usingTimes + 1);
+        WriteFileHouse.write(houses);
+    }
+
+
 }

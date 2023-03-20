@@ -10,4 +10,6 @@ public interface IHouseRepository {
     Map<House, Integer> getAll();
 
     void add(Map<House, Integer> houses);
+
+
 }

@@ -16,4 +16,6 @@ public class HouseRepository implements IHouseRepository{
     public void add(Map<House, Integer> houses) {
         WriteFileHouse.write(houses);
     }
+
+
 }

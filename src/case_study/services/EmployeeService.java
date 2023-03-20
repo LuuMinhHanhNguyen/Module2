@@ -2,6 +2,7 @@ package case_study.services;
 
 import case_study.repository.EmployeeRepository;
 import case_study.repository.IEmployeeRepository;
+import case_study.utils.UserException;
 import case_study.utils.Utils;
 import case_study.utils.WriteFileEmployees;
 import case_study.models.EducationBackground;
@@ -160,9 +161,12 @@ public class EmployeeService implements IEmployeeService {
                     System.out.println("Enter employee number here:");
                     employeeID = Integer.parseInt(scanner.nextLine());
                     flag = true;
+                    if(employeeID < 0) throw new UserException("ID cannot be a negative number!");
                 } catch (NumberFormatException e){
                     System.out.println("Employee number must be numbers!");
                     flag = false;
+                } catch (UserException e) {
+                    System.out.println(e.getMessage());
                 }
             } while (!flag);
         }

@@ -1,16 +1,19 @@
 package case_study.models;
 
-import java.awt.print.Book;
+import case_study.utils.Utils;
 
-public class Booking {
-    private int bookingID;
-    private String startDate;
-    private String endDate;
+import java.time.LocalDate;
+
+
+public class Booking  implements Comparable{
+    private String bookingID;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private int customerID;
     private String serviceName;
     private String typeOfService;
 
-    public Booking(int bookingID, String startDate, String endDate, int customerID, String serviceName, String typeOfService) {
+    public Booking(String bookingID, LocalDate startDate, LocalDate endDate, int customerID, String serviceName, String typeOfService) {
         this.bookingID = bookingID;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -19,27 +22,27 @@ public class Booking {
         this.typeOfService = typeOfService;
     }
 
-    public int getBookingID() {
+    public String getBookingID() {
         return bookingID;
     }
 
-    public void setBookingID(int bookingID) {
+    public void setBookingID(String bookingID) {
         this.bookingID = bookingID;
     }
 
-    public String getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
@@ -70,12 +73,44 @@ public class Booking {
     @Override
     public String toString() {
         return "Booking{" +
-                "bookingID=" + bookingID +
-                ", startDate='" + startDate + '\'' +
-                ", endDate='" + endDate + '\'' +
-                ", customerID=" + customerID +
-                ", serviceName='" + serviceName + '\'' +
-                ", typeOfService='" + typeOfService + '\'' +
+                "bookingID = " + bookingID +
+                ", startDate = " + Utils.parseLocalDateToString(startDate) +
+                ", endDate = " + Utils.parseLocalDateToString(endDate) +
+                ", customerID = " + customerID +
+                ", serviceName = " + serviceName +
+                ", typeOfService = " + typeOfService +
                 '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Booking) {
+            return (this.bookingID.equals(((Booking) other).bookingID))
+                && (this.startDate.equals(((Booking) other).startDate) || this.endDate.equals(((Booking) other).endDate));
+        } else return false;
+    }
+
+    public String writeToCSV() {
+        return bookingID + "," + Utils.parseLocalDateToString(startDate) + "," + Utils.parseLocalDateToString(endDate) + ","
+                + customerID + "," + serviceName + "," + typeOfService;
+
+    }
+
+
+    @Override
+    public int compareTo(Object o) {
+        if (((Booking) o).startDate.isAfter(this.startDate)) {
+            return -1;
+        } else if (((Booking) o).startDate.isBefore(this.startDate)) {
+            return 1;
+        } else if(((Booking) o).startDate.isEqual(this.startDate)){
+            return -1;
+        } else return 0;
+
     }
 }

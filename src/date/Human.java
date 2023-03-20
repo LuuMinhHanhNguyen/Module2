@@ -1,12 +1,14 @@
 package date;
 
+import case_study.models.Booking;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.time.LocalDate;
 import java.util.Date;
 
-public class Human {
+public class Human implements Comparable{
     private String name;
     private LocalDate DOB;
 
@@ -43,5 +45,17 @@ public class Human {
 
     public String writeToCSV(){
         return name + "," + Utils.parseLocalDateToString(DOB);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if (((Human) o).getDOB().isBefore(this.getDOB())){
+            return 1;
+        } else if (((Human) o).getDOB().isAfter(this.getDOB())){
+            return -1;
+        } else if (((Human) o).getDOB().isEqual(this.getDOB())){
+            return -1;
+        } else return 0;
+
     }
 }

@@ -20,6 +20,8 @@ public class FurumaController {
     private static IHouseService iHouseService = new HouseService();
 
     private static IFacilityService iFacilityService = new FacilityService();
+    private static IBookingService iBookingService = new BookingService();
+    private static IContractService iContractService = new ContractService();
     public static void main(String[] args) {
 
         displayMainMenu();
@@ -107,7 +109,7 @@ public class FurumaController {
             switch (input){
                 case "1": iFacilityService.display(); break;
                 case "2": displayAddNewFacilityMenu(); break;
-                case "3": System.out.println("hihhhi"); break;
+                case "3": iFacilityService.displayFacilityMaintenance(); break;
                 case "4":
                     displayMainMenu();
                     return;
@@ -129,11 +131,11 @@ public class FurumaController {
             System.out.print("Choose your number here:");
             input = scanner.nextLine();
             switch (input){
-                case "1": System.out.println("hihi"); break;
-                case "2": System.out.println("hihhi"); break;
-                case "3": System.out.println("hihhhi"); break;
-                case "4": System.out.println("hihhhi"); break;
-                case "5": System.out.println("hihhhi"); break;
+                case "1": iBookingService.add(); break;
+                case "2": iBookingService.display(); break;
+                case "3": iContractService.add(); break;
+                case "4": iContractService.display(); break;
+                case "5": iContractService.edit(); break;
                 case "6":
                     displayMainMenu();
                     return;
@@ -152,8 +154,8 @@ public class FurumaController {
             System.out.print("Choose your number here:");
             input = scanner.nextLine();
             switch (input){
-                case "1": System.out.println("hihi"); break;
-                case "2": System.out.println("hihhi"); break;
+                case "1": System.out.println("Sorry! This function has not been built yet :> !"); break;
+                case "2": System.out.println("Sorry! This function has not been built yet :< !"); break;
                 case "3":
                     displayMainMenu();
                     return;
