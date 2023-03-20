@@ -2,8 +2,8 @@ package case_study.services;
 
 import case_study.models.Booking;
 import case_study.models.Contract;
-import case_study.repository.ContractRepository;
-import case_study.repository.IContractRepository;
+import case_study.repository.contract.ContractRepository;
+import case_study.repository.contract.IContractRepository;
 import case_study.utils.ReadFileBooking;
 import case_study.utils.ReadFileContract;
 

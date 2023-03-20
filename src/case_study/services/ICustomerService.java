@@ -6,4 +6,5 @@ public interface ICustomerService extends IServices{
     void edit();
     void add();
     boolean findByCustomerNumber(int customerNum);
+    Customer findByCustomerIdAndReturnACustomer(int customerNum);
 }

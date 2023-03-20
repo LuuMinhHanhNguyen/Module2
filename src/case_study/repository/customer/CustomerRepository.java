@@ -1,12 +1,9 @@
-package case_study.repository;
+package case_study.repository.customer;
 
 import case_study.models.Customer;
-import case_study.models.Employee;
-import case_study.services.ICustomerService;
 import case_study.utils.ReadFileCustomers;
 import case_study.utils.WriteFileCustomers;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class CustomerRepository implements ICustomerRepository {

@@ -1,8 +1,8 @@
 package case_study.services;
 
 import case_study.models.*;
-import case_study.repository.CustomerRepository;
-import case_study.repository.ICustomerRepository;
+import case_study.repository.customer.CustomerRepository;
+import case_study.repository.customer.ICustomerRepository;
 import case_study.utils.UserException;
 import case_study.utils.Utils;
 import case_study.utils.WriteFileCustomers;
@@ -37,6 +37,14 @@ public class CustomerService implements ICustomerService {
             if (customer.getCustomerID() == customerNum) return true;
         }
         return false;
+    }
+
+    @Override
+    public Customer findByCustomerIdAndReturnACustomer(int customerNum) {
+        for (int i = 0; i < customers.size(); i++) {
+            if(customerNum == customers.get(i).getCustomerID()) return customers.get(i);
+        }
+        return null;
     }
 
     @Override

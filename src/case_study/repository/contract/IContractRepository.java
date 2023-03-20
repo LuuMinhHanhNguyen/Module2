@@ -1,4 +1,4 @@
-package case_study.repository;
+package case_study.repository.contract;
 
 import case_study.models.Contract;
 

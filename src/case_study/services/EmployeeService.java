@@ -1,7 +1,7 @@
 package case_study.services;
 
-import case_study.repository.EmployeeRepository;
-import case_study.repository.IEmployeeRepository;
+import case_study.repository.employee.EmployeeRepository;
+import case_study.repository.employee.IEmployeeRepository;
 import case_study.utils.UserException;
 import case_study.utils.Utils;
 import case_study.utils.WriteFileEmployees;

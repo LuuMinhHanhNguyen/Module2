@@ -1,12 +1,13 @@
-package case_study.repository;
+package case_study.repository.employee;
 
 import case_study.models.Employee;
+import case_study.repository.employee.IEmployeeRepository;
 import case_study.utils.ReadFileEmployees;
 import case_study.utils.WriteFileEmployees;
 
 import java.util.List;
 
-public class EmployeeRepository implements IEmployeeRepository{
+public class EmployeeRepository implements IEmployeeRepository {
 
     private static List<Employee> employees = ReadFileEmployees.read();
     @Override

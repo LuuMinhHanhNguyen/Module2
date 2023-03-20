@@ -5,6 +5,6 @@ import case_study.models.Customer;
 import java.util.List;
 
 public interface IPromotionService {
-    List<Customer> displayCustomersUsingService();
+    void displayCustomersUsingService();
     List<Customer> displayCustomersGettingVouchers();
 }

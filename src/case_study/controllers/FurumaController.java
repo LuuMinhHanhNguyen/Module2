@@ -22,6 +22,7 @@ public class FurumaController {
     private static IFacilityService iFacilityService = new FacilityService();
     private static IBookingService iBookingService = new BookingService();
     private static IContractService iContractService = new ContractService();
+    private static IPromotionService iPromotionService = new PromotionService();
     public static void main(String[] args) {
 
         displayMainMenu();
@@ -154,8 +155,8 @@ public class FurumaController {
             System.out.print("Choose your number here:");
             input = scanner.nextLine();
             switch (input){
-                case "1": System.out.println("Sorry! This function has not been built yet :> !"); break;
-                case "2": System.out.println("Sorry! This function has not been built yet :< !"); break;
+                case "1": iPromotionService.displayCustomersUsingService(); break;
+                case "2": System.out.println("Sorry! This function has not been built yet :> !"); break;
                 case "3":
                     displayMainMenu();
                     return;
